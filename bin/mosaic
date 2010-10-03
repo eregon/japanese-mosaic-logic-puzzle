@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require File.expand_path '../../lib/japanese_mosaic', __FILE__
+
+$DEBUG = true if ARGV.delete('-d')
+
+puts JapaneseMosaic::Mosaic.new(ARGV.first || "puzzles/simple.txt").solve
