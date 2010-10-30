@@ -1,7 +1,7 @@
 module JapaneseMosaic
   # Three-states cell
-  # true means filled
-  # nil  means undecided
+  # true  means filled
+  # nil   means undecided
   # false means it can not be filled (neighbor of a 0)
   class Cell
     class << self

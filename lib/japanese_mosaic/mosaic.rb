@@ -1,3 +1,6 @@
+require_relative 'extensions/array'
+require_relative 'extensions/string'
+
 module JapaneseMosaic
   class Mosaic
     attr_reader :mosaic, :height, :width
