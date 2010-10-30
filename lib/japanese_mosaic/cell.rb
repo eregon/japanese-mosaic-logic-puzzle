@@ -24,12 +24,12 @@ module JapaneseMosaic
       Cell.changed! and @fill = true if undecided?
     end
     def cannot_be_filled
-      Cell.changed! and @fill = false if can_be_filled?
+      Cell.changed! and @fill = false if fillable?
     end
     def filled?
       @fill
     end
-    def can_be_filled?
+    def fillable?
       @fill != false
     end
     def undecided?
@@ -54,7 +54,7 @@ module JapaneseMosaic
     def neighbors_without_self
       @neighbors_without_self ||= Neighbors.new NEIGHBORS.each_with_object([]) { |(dx,dy), neighbors|
         x, y = @x+dx, @y+dy
-        if x >= 0 and y >= 0 and x < @mosaic.width and y < @mosaic.height and @mosaic[y][x].can_be_filled?
+        if x >= 0 and y >= 0 and x < @mosaic.width and y < @mosaic.height and @mosaic[y][x].fillable?
           neighbors << @mosaic[y][x]
         end
       }
@@ -64,10 +64,10 @@ module JapaneseMosaic
       @value ? @value.to_s : ' '
     end
     def inspect
-      "#<Cell(#{@x},#{@y}) value=#{@value.inspect}#{' filled' if filled?}#{' unfillable' unless can_be_filled?}>"
+      "#<Cell(#{@x},#{@y}) value=#{@value.inspect}#{' filled' if filled?}#{' unfillable' unless fillable?}>"
     end
     def show
-      filled? ? '#' : ($DEBUG && !can_be_filled? ? '.' : ' ')
+      filled? ? '#' : ($DEBUG && !fillable? ? '.' : ' ')
     end
 
     def - cell

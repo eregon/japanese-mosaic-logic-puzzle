@@ -9,7 +9,7 @@ module JapaneseMosaic
     end
 
     def fillable
-      select(&:can_be_filled?)
+      select(&:fillable?)
     end
 
     def positive
