@@ -34,13 +34,12 @@ module JapaneseMosaic
       @mosaic.map { |row| row.map(&:show) % '|' } * "\n"
     end
 
-    # fill if all available around is the number
+    # fill if all available cells around is the number
     def fill_exact_neighbors
       each { |cell| cell.neighbors.each(&:fill) if cell == cell.neighbors.fillable }
     end
 
-    # can not be filled if some number has already all its cells
-    # also remove cells around 0, as they can not be filled
+    # cells around a cell which has already all its neighbors can not be filled (also remove around 0)
     def remove_not_fillable
       each { |cell| cell.neighbors.empty.each(&:cannot_be_filled) if cell == cell.neighbors.filled }
     end

@@ -2,7 +2,7 @@ module JapaneseMosaic
   # Three-states cell
   # true  means filled
   # nil   means undecided
-  # false means it can not be filled (neighbor of a 0)
+  # false means it can not be filled
   class Cell
     class << self
       def changed!
@@ -31,9 +31,6 @@ module JapaneseMosaic
     end
     def can_be_filled?
       @fill != false
-    end
-    def cannot_be_filled?
-      @fill == false
     end
     def undecided?
       @fill.nil?
@@ -67,10 +64,10 @@ module JapaneseMosaic
       @value ? @value.to_s : ' '
     end
     def inspect
-      "#<Cell(#{@x},#{@y}) value=#{@value.inspect}#{' filled' if filled?}#{' unfillable' if cannot_be_filled?}>"
+      "#<Cell(#{@x},#{@y}) value=#{@value.inspect}#{' filled' if filled?}#{' unfillable' unless can_be_filled?}>"
     end
     def show
-      filled? ? '#' : ($DEBUG && cannot_be_filled? ? '.' : ' ')
+      filled? ? '#' : ($DEBUG && !can_be_filled? ? '.' : ' ')
     end
 
     def - cell
