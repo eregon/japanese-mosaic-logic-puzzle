@@ -48,16 +48,16 @@ module JapaneseMosaic
 
     NEIGHBORS = [[1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1], [0,-1], [1,-1]]
     def neighbors
-      @neighbors ||= Neighbors.new([self] + neighbors_without_self)
+      @neighbors ||= ([self] + neighbors_without_self).extend(Neighborhood)
     end
 
     def neighbors_without_self
-      @neighbors_without_self ||= Neighbors.new NEIGHBORS.each_with_object([]) { |(dx,dy), neighbors|
+      @neighbors_without_self ||= NEIGHBORS.each_with_object([]) { |(dx,dy), neighbors|
         x, y = @x+dx, @y+dy
         if x >= 0 and y >= 0 and x < @mosaic.width and y < @mosaic.height and @mosaic[y][x].fillable?
           neighbors << @mosaic[y][x]
         end
-      }
+      }.extend(Neighborhood)
     end
 
     def to_s

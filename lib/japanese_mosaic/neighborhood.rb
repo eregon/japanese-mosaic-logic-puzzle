@@ -1,5 +1,5 @@
 module JapaneseMosaic
-  class Neighbors < Array
+  module Neighborhood
     def filled
       select(&:filled?)
     end
