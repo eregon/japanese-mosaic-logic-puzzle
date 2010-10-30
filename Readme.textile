@@ -1,3 +1,10 @@
+h1. eregon's solution to RPCFN#14: Japanese Mosaic
+
+I use a three-state cells system, managed in a Mosaic (grid), tracking Cell changes while running the 3 algorithms.
+If the algorithms cannot solve it, brute-force is used on the unknown cells.
+
+The code use and redefine many operators, to make it short and expressive.
+
 h2. Japanese Mosaic Logic Puzzle
 
 For rules and examples of the Japanese Mosaic problem you should take a look at the Cucumber acceptance tests.
